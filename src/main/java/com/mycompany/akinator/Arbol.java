@@ -21,7 +21,7 @@ public class Arbol {
         }
     }
     
-    String agregar_Personaje_Pregunta(int tipo){
+    public String agregar_Personaje_Pregunta(int tipo){
         String personaje = "";
         if(tipo == 1){
             System.out.print("que personaje estas pensado?");
