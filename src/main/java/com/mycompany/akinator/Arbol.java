@@ -2,6 +2,7 @@
 package com.mycompany.akinator;
 import java.lang.String;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 public class Arbol {
     
@@ -31,4 +32,25 @@ public class Arbol {
         personaje = entrada.nextLine();
         return personaje;
     } 
+    
+    public void /*Nodo*/ buscar (Nodo n){
+        int op;
+        if(n.getNodo_dr() == null || n.getNodo_iz() == null){
+            System.out.print("tu personaje es: " + n.getPersonaje() + " ?");
+            op = entrada.nextInt();
+            if(op == 0){
+                AgregarNodo(n);
+            }else{
+                JOptionPane.showMessageDialog(null, "Ahuevo");
+            }
+        }else{
+            System.out.print("Es: " + n.getPersonaje() + " ?");
+            op = entrada.nextInt();
+            if(op == 0){
+                buscar(n.getNodo_iz());
+            }else{
+                buscar(n.getNodo_dr());
+            }
+        }
+    }
 }
