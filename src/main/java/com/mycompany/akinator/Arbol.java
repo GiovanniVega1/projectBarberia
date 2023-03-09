@@ -6,51 +6,78 @@ import javax.swing.JOptionPane;
 
 public class Arbol {
     
-    Scanner entrada = new Scanner(System.in);    
-    public Arbol(){}
+    Scanner entrada = new Scanner(System.in);  
+    private Nodo nodo = null;
     
-    public void AgregarNodo(Nodo raiz){
-        Nodo nuevo;
-        
+    public Arbol(){}
+    public Arbol(Nodo n){
+    }
+    
+    public void setNodo(Nodo n){
+        this.nodo = n;
+    }
+    
+    public Nodo getNodo(){
+        return nodo;
+    }
+    
+    public Nodo AgregarNodo(Nodo raiz){
         if(raiz == null){
             raiz = new Nodo(agregar_Personaje_Pregunta(1));
         }else{
-            raiz.setNodo_iz(raiz);
-            raiz.setPersonaje(agregar_Personaje_Pregunta(2));
-            nuevo = new Nodo(agregar_Personaje_Pregunta(1));
-            raiz.setNodo_dr(nuevo);
+            raiz.setNodo_iz(new Nodo(raiz.getPersonaje()));
+            raiz.setPersonaje(agregar_Personaje_Pregunta(0));
+            raiz.setNodo_dr(new Nodo(agregar_Personaje_Pregunta(1)));
         }
+        return raiz;
     }
     
     public String agregar_Personaje_Pregunta(int tipo){
         String personaje = "";
+        entrada.skip("\n");
         if(tipo == 1){
-            System.out.print("que personaje estas pensado?");
+            System.out.print("que personaje estas pensado? \n");
         }else{
-            System.out.print("que de diferente tiene?");
+            System.out.print("que de diferente tiene? \n");
         }
         personaje = entrada.nextLine();
         return personaje;
     } 
     
-    public void /*Nodo*/ buscar (Nodo n){
+    public Nodo buscar (Nodo n){
         int op;
-        if(n.getNodo_dr() == null || n.getNodo_iz() == null){
-            System.out.print("tu personaje es: " + n.getPersonaje() + " ?");
-            op = entrada.nextInt();
-            if(op == 0){
-                AgregarNodo(n);
+        if(n != null){
+            if(n.getNodo_dr() == null || n.getNodo_iz() == null){
+                System.out.print("tu personaje es: " + n.getPersonaje() + " ?");
+                op = entrada.nextInt();
+                if(op == 0){
+                    n = AgregarNodo(n);
+                }else{
+                    System.out.print("Ahuevo perro: \n");
+                }
             }else{
-                JOptionPane.showMessageDialog(null, "Ahuevo");
+                System.out.print("Es: " + n.getPersonaje() + " ?");
+                op = entrada.nextInt();
+                if(op == 0){
+                    buscar(n.getNodo_iz());
+                }else{
+                    buscar(n.getNodo_dr());
+                }
             }
         }else{
-            System.out.print("Es: " + n.getPersonaje() + " ?");
-            op = entrada.nextInt();
-            if(op == 0){
-                buscar(n.getNodo_iz());
-            }else{
-                buscar(n.getNodo_dr());
-            }
+            n = AgregarNodo(n);
+            System.out.print("Agregado: " + n.getPersonaje() + "\n");
+        }
+        return n;
+    }
+    
+    public void imprimir(Nodo n){
+        if(n.getNodo_iz() != null){
+            imprimir(n.getNodo_iz());
+        }else if(n.getNodo_dr() != null){
+            imprimir(n.getNodo_dr());
+        }else{
+            System.out.print("Acabo: " + n.getPersonaje() + "\n");
         }
     }
 }
