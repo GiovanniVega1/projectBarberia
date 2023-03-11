@@ -16,8 +16,8 @@ public class Akinator {
         
         do{
             arr.setNodo(arr.buscar(arr.getNodo()));
-            arr.buscar(arr.getNodo());
             
+            entrada.skip("\n");
             System.out.print("continuar? 0-no 1-si: \n");
             op = entrada.nextInt();
         }while(op != 0);
