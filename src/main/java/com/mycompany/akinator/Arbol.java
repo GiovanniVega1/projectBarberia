@@ -33,19 +33,20 @@ public class Arbol {
     }
     
     public String agregar_Personaje_Pregunta(int tipo){
+        entrada.nextLine();
         String personaje = "";
-        entrada.skip("\n");
         if(tipo == 1){
             System.out.print("que personaje estas pensado? \n");
         }else{
             System.out.print("que de diferente tiene? \n");
         }
-        personaje = entrada.nextLine();
+        personaje = entrada.next();
         return personaje;
     } 
     
     public Nodo buscar (Nodo n){
         int op;
+        entrada.nextLine();
         if(n != null){
             if(n.getNodo_dr() == null || n.getNodo_iz() == null){
                 System.out.print("tu personaje es: " + n.getPersonaje() + " ?");
