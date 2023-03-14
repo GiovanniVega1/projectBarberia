@@ -112,9 +112,9 @@ public class Barberia extends javax.swing.JPanel {
     private void jButtonEnviarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnviarDatosActionPerformed
         int Cli = Integer.parseInt(TextFieldBarbero.getText());
         int Barb = Integer.parseInt(TextFieldCliente.getText());
-        Queue cola1 = servicio.ClienteBarbero(Cli, Barb);
+        //Queue cola1 = servicio.ClienteBarbero(Cli, Barb);
         for(int i=1; i <= Cli; i++){
-            jLabelResultado.setText(String.valueOf(cola1));
+            //jLabelResultado.setText(String.valueOf(cola1));
         }
     }//GEN-LAST:event_jButtonEnviarDatosActionPerformed
 

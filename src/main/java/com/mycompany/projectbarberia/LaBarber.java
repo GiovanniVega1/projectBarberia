@@ -1,5 +1,6 @@
 package com.mycompany.projectbarberia;
 
+import java.util.ArrayDeque;
 import java.util.Queue;
 import java.util.Scanner;
 
@@ -122,11 +123,25 @@ public class LaBarber extends javax.swing.JFrame {
     private void jButtonEnviarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnviarDatosActionPerformed
         int Barb = Integer.parseInt(jTextFieldBarbero.getText());
         int Cli = Integer.parseInt(jTextFieldCliente.getText());
-        Queue cola1 = servicio.ClienteBarbero(Cli, Barb);
-        for(int i=1; i <= Cli; i++){
-            String num = cola1.poll().toString();
+        ArrayDeque<Integer> barbers = servicio.Barberos(Barb);
+        int[] ArrayCli = servicio.Cliente(Cli);
+         int timePerBarber = 5; // tiempo en segundos por cada barbero
+        int currentTime = 0; // tiempo actual en segundos
+        for (int i = 0; i < Cli; i++) {
+            int client = ArrayCli[i]; // sacar al primer barbero de la cola
+             int num = barbers.poll();
+             jTextAreaResultado.setText(String.valueOf(client));
             jTextAreaResultado.setText(String.valueOf(num));
-            //System.out.println("la cola es:" + cola1.poll());
+         
+           
+            currentTime += timePerBarber;
+            if (barbers.isEmpty()) {
+                // si no hay más barberos en la cola, agregar al barbero actual
+                barbers.add(num);
+            } else {
+                // si hay más barberos en la cola, agregar al final
+                barbers.offer(num);
+            }
         }
     }//GEN-LAST:event_jButtonEnviarDatosActionPerformed
 
